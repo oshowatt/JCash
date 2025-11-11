@@ -1,5 +1,4 @@
 // /api/transactions.js
-
 import { supabase } from '../../config/supabaseClient';
 
 export default async function handler(req, res) {
@@ -14,16 +13,26 @@ export default async function handler(req, res) {
         return;
     }
 
-    // Your regular API logic for POST requests
+    // Handle POST requests for transactions
     if (req.method === 'POST') {
         const { transactionType, amount } = req.body;
 
-        // Example transaction processing logic
         try {
-            const response = await supabase.from('transactions').insert({ transactionType, amount });
-            res.status(200).json({ success: true, data: response });
+            // Insert the transaction into the database
+            const { data, error } = await supabase
+                .from('transactions')
+                .insert([{ transactionType, amount }]);
+
+            if (error) {
+                throw new Error(error.message);  // Throws error to be caught in catch block
+            }
+
+            // Return success response with data
+            res.status(200).json({ success: true, data });
         } catch (error) {
-            res.status(500).json({ success: false, error: error.message });
+            // Log the error and return an error message
+            console.error('Transaction error:', error);
+            res.status(500).json({ success: false, error: 'Transaction failed', details: error.message });
         }
     }
 }
