@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JCash Wallet</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="path_to_your_favicon.ico" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+
+  <script>
+    window.addEventListener('load', async () => {
+      if (window.requireAuth) {
+        await window.requireAuth();
+      } else {
+        console.error('Supabase client not initialized. Check script order.');
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="app-wrapper">
+    <div class="app-container fade-in">
+
+      <div class="header">
+        <div class="user-info">
+          <h2 id="userNameDisplay">JCash</h2>
+        </div>
+        <button class="profile-btn" onclick="logoutUser()"><i class='bi bi-box-arrow-right'></i> Logout</button>
+      </div>
+
+      <div class="balance-card">
+        <span class="label">Wallet Balance</span>
+        <div class="amount" id="balance">Php 0.00</div>
+      </div>
+
+      <div class="actions">
+        <button class="action-btn" id="btnTopUp" onclick="openModal('topupModal')"><i class='bi bi-wallet2'></i> Top Up</button>
+        <button class="action-btn" id="btnTransfer" onclick="openModal('transferModal')"><i class='bi bi-arrow-left-right'></i> Transfer</button>
+        <button class="action-btn" id="btnBuy" onclick="openModal('buyModal')"><i class='bi bi-bag-check'></i> Buy</button>
+        <button class="action-btn" id="btnRefund" onclick="openModal('refundModal')"><i class='bi bi-arrow-counterclockwise'></i> Refund</button>
+        <button class="action-btn" id="btnHistory" onclick="openModal('historyModal')"><i class='bi bi-clock-history'></i> History</button>
+      </div>
+
+<!-- DASHBOARD TAB -->
+<div id="dashboard" class="tab-content active">
+  <div class="transactions">
+    <h3>Recent Transactions</h3>
+    <div id="transactionList" class="transaction-list"></div>
+  </div>
+</div>
+
+  <!-- Modal Templates -->
+  <div id="modalOverlay" class="modal-overlay hidden"></div>
+
+  <div class="modal hidden" id="topupModal">
+    <h3>Top Up Wallet</h3>
+    <input type="number" id="topupAmount" placeholder="Enter amount" />
+    <button onclick="submitTopUp()" class="submit-btn">Confirm</button>
+    <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+  </div>
+
+  <div class="modal hidden" id="transferModal">
+    <h3>Transfer Funds</h3>
+    <input type="tel" id="transferUser" placeholder="Recipient Phone Number" />
+    <input type="number" id="transferAmount" placeholder="Enter amount" />
+    <button onclick="submitTransfer()" class="submit-btn">Send</button>
+    <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+  </div>
+
+  <div class="modal hidden" id="buyModal">
+    <h3>Buy from Merchant</h3>
+    <select id="merchantSelect"></select>
+    <input type="number" id="buyAmount" placeholder="Enter purchase amount" />
+    <button onclick="submitBuy()" class="submit-btn">Buy</button>
+    <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+  </div>
+
+  <div class="modal hidden" id="refundModal">
+    <h3>Refund</h3>
+    <label for="refundSource">Choose transaction to refund</label>
+    <select id="refundSource"></select>
+    <input type="text" id="refundNote" placeholder="Reason (optional)" />
+    <button onclick="submitRefund()" class="submit-btn">Process Refund</button>
+    <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+  </div>
+
+  <div class="modal hidden" id="historyModal">
+    <h3>All Transactions</h3>
+    <div id="historyList" class="transaction-list"></div>
+    <button onclick="closeModal()" class="cancel-btn">Close</button>
+  </div>
+
+
+  <!-- Create Account Form -->
+<div id="createAccountModal" class="modal hidden">
+  <h3>Create Account</h3>
+  <input type="tel" id="phoneNumber" placeholder="Enter phone number" />
+  <input type="text" id="username" placeholder="Enter username (optional)" />
+  <select id="roleSelect">
+    <option value="user">User</option>
+    <option value="merchant">Merchant</option>
+  </select>
+  <button onclick="submitCreateAccount()">Create Account</button>
+  <button onclick="closeModal()">Cancel</button>
+</div>
+
+<!-- Login Form -->
+<div id="loginModal" class="modal hidden">
+  <h3>Login</h3>
+  <input type="tel" id="loginPhoneNumber" placeholder="Enter your phone number" />
+  <button onclick="submitLogin()">Login</button>
+  <button onclick="closeModal()">Cancel</button>
+</div>
+
+  <script src="createAccount.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
