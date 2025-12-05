@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JCash Wallet</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
 
@@ -15,44 +18,73 @@
       if (window.requireAuth) {
         await window.requireAuth();
       } else {
-        console.error('Supabase client not initialized. Check script order.');
+        console.error('Supabase client not initialized.');
       }
     });
   </script>
 </head>
+
 <body>
   <div class="app-wrapper">
     <div class="app-container fade-in">
 
-      <div class="header">
-        <div class="user-info">
-          <h2 id="userNameDisplay">JCash</h2>
-        </div>
-        <button class="profile-btn" onclick="logoutUser()"><i class='bi bi-box-arrow-right'></i> Logout</button>
+      <!-- HEADER (Improved) -->
+      <div class="top-header">
+        <h2 id="userNameDisplay">JCash</h2>
+        <button class="logout-btn" onclick="logoutUser()">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
       </div>
 
+      <!-- BALANCE CARD (Improved Look, same IDs) -->
       <div class="balance-card">
         <span class="label">Wallet Balance</span>
         <div class="amount" id="balance">₱0.00</div>
       </div>
 
-      <div class="actions">
-        <button class="action-btn" id="btnTopUp" onclick="openModal('topupModal')"><i class='bi bi-wallet2'></i> Top Up</button>
-        <button class="action-btn" id="btnTransfer" onclick="openModal('transferModal')"><i class='bi bi-arrow-left-right'></i> Transfer</button>
-        <button class="action-btn" id="btnBuy" onclick="openModal('buyModal')"><i class='bi bi-bag-check'></i> Buy</button>
-        <button class="action-btn" id="btnRefund" onclick="openModal('refundModal')"><i class='bi bi-arrow-counterclockwise'></i> Refund</button>
-        <button class="action-btn" id="btnHistory" onclick="openModal('historyModal')"><i class='bi bi-clock-history'></i> History</button>
+      <!-- ACTION BUTTONS (Same functions, cleaner layout) -->
+      <div class="quick-actions">
+
+        <button class="action" id="btnTopUp" onclick="openModal('topupModal')">
+          <i class="bi bi-wallet2"></i>
+          <span>Top Up</span>
+        </button>
+
+        <button class="action" id="btnTransfer" onclick="openModal('transferModal')">
+          <i class="bi bi-arrow-left-right"></i>
+          <span>Transfer</span>
+        </button>
+
+        <button class="action" id="btnBuy" onclick="openModal('buyModal')">
+          <i class="bi bi-bag-check"></i>
+          <span>Buy</span>
+        </button>
+
+        <button class="action" id="btnRefund" onclick="openModal('refundModal')">
+          <i class="bi bi-arrow-counterclockwise"></i>
+          <span>Refund</span>
+        </button>
+
+        <button class="action" id="btnHistory" onclick="openModal('historyModal')">
+          <i class="bi bi-clock-history"></i>
+          <span>History</span>
+        </button>
+
       </div>
 
-<!-- DASHBOARD TAB -->
-<div id="dashboard" class="tab-content active">
-  <div class="transactions">
-    <h3>Recent Transactions</h3>
-    <div id="transactionList" class="transaction-list"></div>
-  </div>
-</div>
+      <!-- TRANSACTIONS (Preserved) -->
+      <div id="dashboard" class="tab-content active">
+        <div class="transaction-section">
+          <h3>Recent Transactions</h3>
+          <div id="transactionList" class="transaction-list"></div>
+        </div>
+      </div>
 
-  <!-- Modal Templates -->
+    </div>
+  </div>
+
+  <!-- ======= ORIGINAL MODALS (Unchanged) ======= -->
+
   <div id="modalOverlay" class="modal-overlay hidden"></div>
 
   <div class="modal hidden" id="topupModal">
@@ -80,7 +112,7 @@
 
   <div class="modal hidden" id="refundModal">
     <h3>Refund</h3>
-    <label for="refundSource">Choose transaction to refund</label>
+    <label>Choose transaction to refund</label>
     <select id="refundSource"></select>
     <input type="text" id="refundNote" placeholder="Reason (optional)" />
     <button onclick="submitRefund()" class="submit-btn">Process Refund</button>
@@ -93,28 +125,28 @@
     <button onclick="closeModal()" class="cancel-btn">Close</button>
   </div>
 
+  <!-- Create Account -->
+  <div id="createAccountModal" class="modal hidden">
+    <h3>Create Account</h3>
+    <input type="tel" id="phoneNumber" placeholder="Enter phone number" />
+    <input type="text" id="username" placeholder="Enter username (optional)" />
+    <select id="roleSelect">
+      <option value="user">User</option>
+      <option value="merchant">Merchant</option>
+    </select>
+    <button onclick="submitCreateAccount()">Create Account</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
 
-  <!-- Create Account Form -->
-<div id="createAccountModal" class="modal hidden">
-  <h3>Create Account</h3>
-  <input type="tel" id="phoneNumber" placeholder="Enter phone number" />
-  <input type="text" id="username" placeholder="Enter username (optional)" />
-  <select id="roleSelect">
-    <option value="user">User</option>
-    <option value="merchant">Merchant</option>
-  </select>
-  <button onclick="submitCreateAccount()">Create Account</button>
-  <button onclick="closeModal()">Cancel</button>
-</div>
+  <!-- Login -->
+  <div id="loginModal" class="modal hidden">
+    <h3>Login</h3>
+    <input type="tel" id="loginPhoneNumber" placeholder="Enter your phone number" />
+    <button onclick="submitLogin()">Login</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
 
-<!-- Login Form -->
-<div id="loginModal" class="modal hidden">
-  <h3>Login</h3>
-  <input type="tel" id="loginPhoneNumber" placeholder="Enter your phone number" />
-  <button onclick="submitLogin()">Login</button>
-  <button onclick="closeModal()">Cancel</button>
-</div>
-
+  <!-- Scripts -->
   <script src="createAccount.js"></script>
   <script src="script.js"></script>
 

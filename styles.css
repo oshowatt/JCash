@@ -1,0 +1,204 @@
+/* GENERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #eef2f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* WRAPPER */
+.app-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 420px;
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* FADE ANIMATION */
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HEADER */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logout-btn {
+  background: #f0f3ff;
+  border: none;
+  padding: 8px 11px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* BALANCE CARD */
+.balance-card {
+  background: linear-gradient(135deg, #0066ff, #00aaff);
+  padding: 22px;
+  height: 120px;
+  border-radius: 20px;
+  color: white;
+
+  /* Centers content perfectly */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+
+
+  border-radius: 22px;
+}
+
+.balance-card .label {
+  font-size: 16px;
+  opacity: 0.95;
+  margin-bottom: 3px;
+}
+
+.balance-card .amount,
+.balance-card h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+
+.balance-card .title {
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+.balance-card h1 {
+  font-size: 40px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+/* ACTION BUTTON GRID */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.quick-actions button {
+  background: #f4f6ff;
+  border: none;
+  padding: 12px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.quick-actions button:hover {
+  background: #dce8ff;
+}
+
+.quick-actions i {
+  font-size: 20px;
+  color: #0055ff;
+}
+
+/* TRANSACTION LIST */
+.transaction-section h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.transaction-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.transaction-item {
+  background: #f9f9ff;
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.green { color: #00b341; }
+.red { color: #ff3b3b; }
+
+/* MODALS (same styles as your version) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px;
+  width: 340px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.hidden { display: none; }
+
+.modal input {
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+}
+
+.submit-btn {
+  background: #0066ff;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+}
+
+.cancel-btn {
+  background: #ccc;
+  color: black;
+  padding: 12px;
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+}
