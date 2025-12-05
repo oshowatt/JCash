@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JCash - Login</title>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="login.js" defer></script>
+  <script src="createAccount.js" defer></script>
+
+  <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- LOGIN BOX -->
+    <div class="card">
+      <h2 class="title">Login to <span>JCash</span></h2>
+
+      <input type="tel" id="loginPhoneNumber" placeholder="Phone number" class="input" />
+      <button class="btn" onclick="submitLogin()">Login</button>
+
+      <div class="divider">or</div>
+
+      <input type="text" id="loginUsername" placeholder="Username" class="input" />
+      <button class="btn-secondary" onclick="submitLoginByUsername()">Login with Username</button>
+    </div>
+
+    <!-- CREATE ACCOUNT BOX -->
+    <div class="card">
+      <h2 class="title">Create Account</h2>
+
+      <input type="tel" id="phoneNumber" placeholder="Phone number" class="input" />
+      <input type="text" id="username" placeholder="Username (optional)" class="input" />
+
+      <select id="roleSelect" class="input">
+        <option value="user">User</option>
+        <option value="merchant">Merchant</option>
+      </select>
+
+      <button class="btn" onclick="submitCreateAccount()">Create Account</button>
+    </div>
+
+  </div>
+</body>
+</html>
