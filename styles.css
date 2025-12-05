@@ -1,4 +1,46 @@
 /* GENERAL */
+:root {
+  --bg: #f7f9f7;
+  --card-grad-1: #0f9d58;
+  --card-grad-2: #0b7a3d;
+  --button-bg: #f1f5f1;
+  --button-hover: #e3e9e3;
+  --accent: #0f9d58;
+  --text-main: #0f0f0f;
+  --pos: #0f9d58;
+  --neg: #111111;
+  --submit-bg: #0f9d58;
+  --cancel-bg: #111111;
+}
+
+.theme-user {
+  --bg: #f7f9f7;
+  --card-grad-1: #0f9d58;
+  --card-grad-2: #0b7a3d;
+  --button-bg: #f1f5f1;
+  --button-hover: #e3e9e3;
+  --accent: #0f9d58;
+  --text-main: #0f0f0f;
+  --pos: #0f9d58;
+  --neg: #111111;
+  --submit-bg: #0f9d58;
+  --cancel-bg: #111111;
+}
+
+.theme-merchant {
+  --bg: #fff8f1;
+  --card-grad-1: #f97316;
+  --card-grad-2: #ea580c;
+  --button-bg: #fff4e5;
+  --button-hover: #ffe8cc;
+  --accent: #f97316;
+  --text-main: #0f0f0f;
+  --pos: #f97316;
+  --neg: #111111;
+  --submit-bg: #f97316;
+  --cancel-bg: #111111;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +49,7 @@
 }
 
 body {
-  background: #eef2f8;
+  background: var(--bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,17 +89,18 @@ body {
 }
 
 .logout-btn {
-  background: #f0f3ff;
+  background: var(--button-bg);
   border: none;
   padding: 8px 11px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
+  color: var(--text-main);
 }
 
 /* BALANCE CARD */
 .balance-card {
-  background: linear-gradient(135deg, #0066ff, #00aaff);
+  background: linear-gradient(135deg, var(--card-grad-1), var(--card-grad-2));
   padding: 22px;
   height: 120px;
   border-radius: 20px;
@@ -111,7 +154,7 @@ body {
 }
 
 .quick-actions button {
-  background: #f4f6ff;
+  background: var(--button-bg);
   border: none;
   padding: 12px;
   border-radius: 16px;
@@ -122,39 +165,65 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  color: var(--text-main);
 }
 
 .quick-actions button:hover {
-  background: #dce8ff;
+  background: var(--button-hover);
 }
 
 .quick-actions i {
   font-size: 20px;
-  color: #0055ff;
+  color: var(--accent);
 }
 
 /* TRANSACTION LIST */
 .transaction-section h3 {
-  font-size: 17px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 6px;
+  padding: 10px 12px;
+  background: var(--button-bg);
+  border-radius: 12px;
+  color: var(--text-main);
+  border: 1px solid #e4e7ec;
 }
 
 .transaction-list {
   max-height: 300px;
   overflow-y: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e4e7ec;
 }
 
 .transaction-item {
-  background: #f9f9ff;
-  padding: 14px;
-  border-radius: 14px;
-  margin-bottom: 10px;
+  background: #ffffff;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.green { color: #00b341; }
-.red { color: #ff3b3b; }
+.green { color: var(--pos); }
+.red { color: var(--neg); }
+
+.tx-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #111;
+}
+
+.tx-date {
+  font-size: 12px;
+  color: #8a8f99;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
 
 /* MODALS (same styles as your version) */
 .modal-overlay {
@@ -169,7 +238,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  padding: 25px;
+  padding: 24px;
   width: 340px;
   border-radius: 18px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
@@ -177,28 +246,35 @@ body {
 
 .hidden { display: none; }
 
-.modal input {
+.modal input,
+.modal select {
   width: 100%;
-  padding: 11px;
+  padding: 12px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cbd5d0;
   margin-bottom: 12px;
+  background: #f9fbf8;
+  font-size: 14px;
 }
 
 .submit-btn {
-  background: #0066ff;
+  background: var(--submit-bg);
   color: white;
-  padding: 12px;
+  padding: 13px;
   width: 100%;
   border-radius: 12px;
   border: none;
+  margin-top: 6px;
+  font-weight: 600;
 }
 
 .cancel-btn {
-  background: #ccc;
-  color: black;
-  padding: 12px;
+  background: var(--cancel-bg);
+  color: white;
+  padding: 13px;
   width: 100%;
   border-radius: 12px;
   border: none;
+  margin-top: 8px;
+  font-weight: 600;
 }

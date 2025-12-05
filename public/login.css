@@ -2,98 +2,154 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background: #e6f0ff;
+  background: #f7f9f7;
   display: flex;
   justify-content: center;
   align-items: center;
-
   min-height: 100vh;
+  color: #0f0f0f;
+}
+
+.app-shell {
+  width: 100%;
+  max-width: 520px;
+  padding: 16px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #0f9d58, #0b7a3d);
+  color: white;
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin-top: 6px;
+  opacity: 0.9;
+  font-size: 14px;
 }
 
 .container {
   width: 100%;
-  max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  justify-content: center;
+  gap: 16px;
 }
-
 
 .card {
   background: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.08);
 }
 
 .title {
-  text-align: center;
-  color: #1f4bd8;
-  margin-bottom: 15px;
+  text-align: left;
+  color: #0f9d58;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
-.title span {
-  font-weight: 700;
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  margin-top: 10px;
 }
 
 .input {
   width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  border: 1px solid #b6c7e6;
-  border-radius: 8px;
+  padding: 12px;
+  margin-top: 6px;
+  border: 1px solid #cbd5d0;
+  border-radius: 10px;
   font-size: 14px;
+  background: #f9fbf8;
 }
 
 .input:focus {
-  border-color: #1f4bd8;
+  border-color: #0f9d58;
   outline: none;
+  box-shadow: 0 0 0 3px rgba(15, 157, 88, 0.15);
 }
 
 .btn {
   width: 100%;
-  padding: 10px;
+  padding: 13px;
   margin-top: 12px;
-  background: #1f4bd8;
+  background: #0f9d58;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   transition: 0.2s;
+  font-weight: 600;
 }
 
 .btn:hover {
-  background: #173bb3;
+  background: #0b7a3d;
 }
 
 .btn-secondary {
   width: 100%;
-  padding: 10px;
-  margin-top: 8px;
+  padding: 12px;
+  margin-top: 10px;
   background: white;
-  border: 1px solid #1f4bd8;
-  color: #1f4bd8;
-  border-radius: 8px;
+  border: 1px solid #0f9d58;
+  color: #0f9d58;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.2s;
+  font-weight: 600;
 }
 
 .btn-secondary:hover {
-  background: #e8efff;
+  background: #e6f4ea;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px dashed #0f9d58;
+  color: #0f9d58;
 }
 
 .divider {
   text-align: center;
   margin: 12px 0;
   color: #777;
-}
-.btn,
-.btn-secondary {
-  width: 60%;          /* button width (adjust if you want) */
-  margin-left: auto;  
-  margin-right: auto; 
-  display: block;     
+  font-size: 13px;
 }
 
+.divider.slim {
+  margin: 10px 0 6px;
+}
+
+.hidden { display: none; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  width: 320px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  z-index: 10;
+}

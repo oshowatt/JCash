@@ -15,36 +15,59 @@
 </head>
 
 <body>
-  <div class="container">
-
-    <!-- LOGIN BOX -->
-    <div class="card">
-      <h2 class="title">Login to <span>JCash</span></h2>
-
-      <input type="tel" id="loginPhoneNumber" placeholder="Phone number" class="input" />
-      <button class="btn" onclick="submitLogin()">Login</button>
-
-      <div class="divider">or</div>
-
-      <input type="text" id="loginUsername" placeholder="Username" class="input" />
-      <button class="btn-secondary" onclick="submitLoginByUsername()">Login with Username</button>
+  <div class="app-shell">
+    <div class="hero">
+      <div class="brand">JCash</div>
+      <p class="subtitle">Secure wallet access in seconds</p>
     </div>
+    <div class="container">
 
-    <!-- CREATE ACCOUNT BOX -->
-    <div class="card">
-      <h2 class="title">Create Account</h2>
+      <!-- LOGIN BOX -->
+      <div class="card">
+        <h2 class="title">Login</h2>
 
-      <input type="tel" id="phoneNumber" placeholder="Phone number" class="input" />
-      <input type="text" id="username" placeholder="Username (optional)" class="input" />
+        <label class="field-label" for="loginPhoneNumber">Phone number</label>
+        <input type="tel" id="loginPhoneNumber" placeholder="09xxxxxxxxx" class="input" />
+        <button class="btn" onclick="submitLogin()">Continue</button>
 
-      <select id="roleSelect" class="input">
-        <option value="user">User</option>
-        <option value="merchant">Merchant</option>
-      </select>
+        <div class="divider">or</div>
 
-      <button class="btn" onclick="submitCreateAccount()">Create Account</button>
+        <label class="field-label" for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter username" class="input" />
+        <button class="btn-secondary" onclick="submitLoginByUsername()">Login with Username</button>
+
+        <div class="divider slim">Need an account?</div>
+        <button class="btn ghost" type="button" onclick="openCreateModal()">Create Account</button>
+      </div>
     </div>
-
   </div>
+
+  <!-- Create Account Modal -->
+  <div id="createModalOverlay" class="modal-overlay hidden"></div>
+  <div id="createModal" class="modal hidden">
+    <h3>Create Account</h3>
+    <label class="field-label" for="phoneNumber">Phone number</label>
+    <input type="tel" id="phoneNumber" placeholder="09xxxxxxxxx" class="input" />
+    <label class="field-label" for="username">Username (optional)</label>
+    <input type="text" id="username" placeholder="Set a username" class="input" />
+    <label class="field-label" for="roleSelect">Role</label>
+    <select id="roleSelect" class="input">
+      <option value="user">User</option>
+      <option value="merchant">Merchant</option>
+    </select>
+    <button class="btn" onclick="submitCreateAccount()">Create Account</button>
+    <button class="btn-secondary" type="button" onclick="closeCreateModal()">Cancel</button>
+  </div>
+
+  <script>
+    function openCreateModal() {
+      document.getElementById('createModal').classList.remove('hidden');
+      document.getElementById('createModalOverlay').classList.remove('hidden');
+    }
+    function closeCreateModal() {
+      document.getElementById('createModal').classList.add('hidden');
+      document.getElementById('createModalOverlay').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>

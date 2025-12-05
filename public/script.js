@@ -30,6 +30,16 @@ function setUserName() {
   }
 }
 
+function applyTheme() {
+  const body = document.body;
+  body.classList.remove('theme-user', 'theme-merchant');
+  if (storedUser?.role === 'merchant') {
+    body.classList.add('theme-merchant');
+  } else {
+    body.classList.add('theme-user');
+  }
+}
+
 function configureActions() {
   if (isMerchant) {
     const hideIds = ['btnTopUp', 'btnTransfer', 'btnBuy'];
@@ -400,7 +410,7 @@ function renderTransactionLists(txList) {
   if (list) list.innerHTML = '';
   if (historyList) historyList.innerHTML = '';
 
-  const recent = txList.slice(0, 5);
+  const recent = txList.slice(0, 3);
   recent.forEach(tx => {
     const direction = directionForTx(tx);
     addTransaction(transactionLabel(tx), tx.amount, direction, tx.created_at, list);
@@ -413,6 +423,7 @@ function renderTransactionLists(txList) {
 }
 
 setUserName();
+applyTheme();
 if (ensureLoggedIn()) {
   configureActions();
   loadBalanceFromDb();
