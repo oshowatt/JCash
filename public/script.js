@@ -1,4 +1,4 @@
-let balance = 0;
+﻿let balance = 0;
 const balanceDisplay = document.getElementById("balance");
 const list = document.getElementById("transactionList");
 const historyList = document.getElementById("historyList");
@@ -53,6 +53,11 @@ function configureActions() {
 function formatDate(value) {
   const d = value ? new Date(value) : new Date();
   return d.toLocaleString();
+}
+
+function formatAmount(value) {
+  const num = Number(value) || 0;
+  return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function directionForTx(tx) {
@@ -242,7 +247,7 @@ async function logoutUser() {
 }
 
 function updateUI() {
-  balanceDisplay.textContent = `₱${balance.toFixed(2)}`;
+  balanceDisplay.textContent = '\u20b1' + formatAmount(balance);
 }
 
 function addTransaction(name, amount, direction, createdAt, targetList = list) {
@@ -254,7 +259,7 @@ function addTransaction(name, amount, direction, createdAt, targetList = list) {
       <span>${name}</span>
       <span class="tx-date">${formatDate(createdAt)}</span>
     </div>
-    <span class="${direction === 'in' ? 'green' : 'red'}">${direction === 'in' ? '+' : '-'}₱${amount}</span>
+    <span class="${direction === 'in' ? 'green' : 'red'}">${direction === 'in' ? '+' : '-'}\u20b1${formatAmount(amount)}</span>
   `;
 
   targetList?.appendChild(div);
@@ -387,7 +392,7 @@ function renderRefundOptions(txList) {
     const opt = document.createElement('option');
     const otherAccount = otherAccountForRefund(tx);
     opt.value = tx.id;
-    opt.textContent = `${transactionLabel(tx)} • ₱${tx.amount} • ${formatDate(tx.created_at)}`;
+    opt.textContent = `${transactionLabel(tx)} — \u20b1${formatAmount(tx.amount)} — ${formatDate(tx.created_at)}`;
     opt.dataset.amount = tx.amount;
     opt.dataset.otheraccount = otherAccount || '';
     if (!firstUsable) firstUsable = opt;
@@ -431,3 +436,14 @@ if (ensureLoggedIn()) {
   loadMerchants();
 }
 updateUI();
+
+
+
+
+
+
+
+
+
+
+
