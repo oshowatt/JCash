@@ -14,6 +14,7 @@ let storedUser = getStoredUser ? getStoredUser() : null;
 let accountId = storedUser?.account_id || null;
 const isMerchant = storedUser?.role === 'merchant';
 let accountLabels = {};
+let refreshTimer = null;
 
 function ensureLoggedIn() {
   if (!storedUser || !accountId) {
@@ -427,6 +428,14 @@ function renderTransactionLists(txList) {
   });
 }
 
+function startAutoRefresh(intervalMs = 5000) {
+  if (refreshTimer) return;
+  refreshTimer = setInterval(() => {
+    loadBalanceFromDb();
+    loadTransactions();
+  }, intervalMs);
+}
+
 setUserName();
 applyTheme();
 if (ensureLoggedIn()) {
@@ -434,6 +443,7 @@ if (ensureLoggedIn()) {
   loadBalanceFromDb();
   loadTransactions();
   loadMerchants();
+  startAutoRefresh();
 }
 updateUI();
 
